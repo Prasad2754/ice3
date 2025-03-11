@@ -2,8 +2,5 @@
   "name": "ice3-project",
   "version": "1.0.0",
   "description": "Security scanning project",
-  "dependencies": {
-    "lodash": "4.17.15",
-    "express": "4.16.1"
-  }
+  "dependencies": {}
 }
