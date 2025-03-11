@@ -15,14 +15,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Use the correct Node.js version for your project
+          node-version: '18'
 
       - name: Install dependencies
-        run: npm install  # This requires package.json in your repo
+        run: npm install  # Make sure you have a valid package.json
 
       - name: Run Snyk scan
         uses: snyk/actions/node@master
         with:
           args: test
-       env:
-  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
