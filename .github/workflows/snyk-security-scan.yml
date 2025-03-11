@@ -3,11 +3,11 @@ name: Snyk Security Scan
 on:
   push:
     branches:
-      - main  # Runs this workflow when you push to the main branch
+      - main
 
 jobs:
   security_scan:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -17,12 +17,20 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
-        run: npm install  # Make sure you have a valid package.json
+        run: npm install
 
       - name: Run Snyk scan
         uses: snyk/actions/node@master
         with:
-          args: test
+          args: test --fail-fast
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
