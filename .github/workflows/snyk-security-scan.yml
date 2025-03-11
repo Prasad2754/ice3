@@ -17,13 +17,9 @@ jobs:
         with:
           node-version: '18'  # Change this if you're using a different Node.js version
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Run Snyk scan
-        uses: snyk/actions/node@master
-        with:
-          args: test
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
+  uses: snyk/actions/node@master
+  with:
+    args: test
+  env:
+    SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
